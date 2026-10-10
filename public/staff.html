@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Staff Portal - Haraya Bay By Zaldy Land (Simulation)</title>
+  <link rel="icon" href="/img/emblem.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/staff.css">
+  <link rel="stylesheet" href="/css/themes.css">
+  <script src="/js/theme.js"></script>
+</head>
+<body class="staff">
+  <a class="skip-link" href="#content">Skip to Content</a>
+  <header class="staff-top">
+    <div class="st-in">
+      <a class="st-brand" href="#dashboard" aria-label="Dashboard"><svg class="mg-ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.1" aria-hidden="true"><rect x="11" y="11" width="26" height="26" transform="rotate(45 24 24)"/><text x="24" y="30.5" text-anchor="middle" font-size="19" font-family="Cormorant Garamond, Georgia, serif" font-weight="600" fill="currentColor" stroke="none">H</text></svg></a>
+      <div class="st-title"><b>Haraya Bay &middot; Staff Console</b><span>By Zaldy Land &middot; Reservations, Inventory &amp; Events</span></div>
+      <div class="st-right">
+        <span class="st-date" id="todayLabel"></span>
+        <div data-theme-slot></div>
+        <a class="btn btn--light btn--sm" href="/">Guest site</a>
+        <button class="btn btn--black btn--sm" type="button" data-new-reservation>+ New reservation</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="staff-body">
+    <nav class="tabs" aria-label="Staff sections">
+      <a href="#dashboard" data-nav="dashboard">Dashboard</a>
+      <a href="#reservations" data-nav="reservations">Reservations</a>
+      <a href="#guests" data-nav="guests">Guests</a>
+      <a href="#rooms" data-nav="rooms">Rooms &amp; Availability</a>
+      <a href="#events" data-nav="events">Events &amp; Venues</a>
+      <a href="#outbox" data-nav="outbox">Notifications</a>
+    </nav>
+    <div class="staff-view-head">
+      <h1 id="viewTitle">Dashboard</h1>
+      <p class="staff-note">Simulation only: no authentication and no real guest data. <a href="/events.html" target="_blank" rel="noopener">Guest events page</a> &middot; <a href="/map.html" target="_blank" rel="noopener">Property map</a></p>
+    </div>
+    <main class="staff-content" id="content">
+        <!-- Dashboard -->
+        <section class="view" data-view="dashboard" aria-label="Dashboard">
+          <div class="toolbar">
+            <div class="field">
+              <label for="dashDate">Occupancy date</label>
+              <input class="input" type="date" id="dashDate">
+            </div>
+            <button class="btn btn--sm" type="button" id="dashToday">Today</button>
+            <span class="spacer"></span>
+          </div>
+          <div class="stats" id="dashStats"></div>
+          <div class="dash-grid">
+            <div class="card">
+              <div class="card__head"><h2>Occupancy by category</h2><span class="muted" id="occDate"></span></div>
+              <div class="card__body" id="dashOccupancy"></div>
+            </div>
+            <div class="card">
+              <div class="card__head"><h2>Reservation status</h2></div>
+              <div class="card__body" id="dashStatus"></div>
+            </div>
+            <div class="card">
+              <div class="card__head"><h2>Arrivals</h2><span class="muted" id="arrCount"></span></div>
+              <div class="card__body"><ul class="list" id="dashArrivals"></ul></div>
+            </div>
+            <div class="card">
+              <div class="card__head"><h2>Departures</h2><span class="muted" id="depCount"></span></div>
+              <div class="card__body"><ul class="list" id="dashDepartures"></ul></div>
+            </div>
+            <div class="card span-2">
+              <div class="card__head"><h2>Latest simulated notifications</h2><a href="#outbox" class="small">View all</a></div>
+              <div class="card__body"><ul class="list" id="dashNotifications"></ul></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Reservations -->
+        <section class="view" data-view="reservations" aria-label="Reservations" hidden>
+          <form class="toolbar" id="resFilters" role="search">
+            <div class="field field--grow">
+              <label for="fQ">Search guest or reference</label>
+              <input class="input" id="fQ" name="q" placeholder="Name, email, phone or HRY-XXXXXX">
+            </div>
+            <div class="field">
+              <label for="fCategory">Room category</label>
+              <select class="select" id="fCategory" name="category"><option value="">All categories</option></select>
+            </div>
+            <div class="field">
+              <label for="fStatus">Status</label>
+              <select class="select" id="fStatus" name="status"><option value="">All statuses</option></select>
+            </div>
+            <div class="field">
+              <label for="fFrom">Staying from</label>
+              <input class="input" type="date" id="fFrom" name="from">
+            </div>
+            <div class="field">
+              <label for="fTo">Staying to</label>
+              <input class="input" type="date" id="fTo" name="to">
+            </div>
+            <button class="btn btn--sm" type="reset">Clear</button>
+          </form>
+          <p class="result-count" id="resCount"></p>
+          <div class="table-wrap">
+            <table class="data responsive">
+              <thead>
+                <tr><th>Reference</th><th>Guest</th><th>Room</th><th>Stay</th><th>Guests</th><th>Total</th><th>Status</th><th>Actions</th></tr>
+              </thead>
+              <tbody id="resBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Guests -->
+        <section class="view" data-view="guests" aria-label="Guests" hidden>
+          <div class="toolbar">
+            <div class="field field--grow">
+              <label for="gQ">Search guests</label>
+              <input class="input" id="gQ" placeholder="Name, email or phone">
+            </div>
+          </div>
+          <p class="result-count" id="guestCount"></p>
+          <div class="table-wrap">
+            <table class="data responsive">
+              <thead><tr><th>Guest</th><th>Email</th><th>Phone</th><th>Reservations</th><th>Latest check-in</th><th>Actions</th></tr></thead>
+              <tbody id="guestBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Rooms -->
+        <section class="view" data-view="rooms" aria-label="Rooms and availability" hidden>
+          <div class="inventory-cards" id="inventoryCards"></div>
+          <div class="toolbar">
+            <div class="field">
+              <label for="tlStart">Timeline start</label>
+              <input class="input" type="date" id="tlStart">
+            </div>
+            <button class="btn btn--sm" type="button" data-shift="-7">&larr; 7 days</button>
+            <button class="btn btn--sm" type="button" data-shift="0">Today</button>
+            <button class="btn btn--sm" type="button" data-shift="7">7 days &rarr;</button>
+          </div>
+          <div class="legend">
+            <span><i class="tl--pending"></i>Pending</span>
+            <span><i class="tl--confirmed"></i>Confirmed</span>
+            <span><i class="tl--checked-in"></i>Checked in</span>
+            <span><i style="border:1px solid var(--line)"></i>Available</span>
+            <span class="muted">A room is free again on the guest's check-out date. Click a booking to open it.</span>
+          </div>
+          <div id="timeline"></div>
+        </section>
+
+        <!-- Events & venues -->
+        <section class="view" data-view="events" aria-label="Events and venues" hidden>
+          <div class="stats" id="evStats"></div>
+          <div class="card ev-requests" id="evRequestsCard" hidden>
+            <div class="card__head"><h2>Venue requests awaiting review</h2><span class="muted" id="evRequestsCount"></span></div>
+            <div class="card__body"><ul class="list" id="evRequests"></ul></div>
+          </div>
+          <form class="toolbar" id="evFilters" role="search">
+            <div class="field field--grow">
+              <label for="efQ">Search events</label>
+              <input class="input" id="efQ" name="q" placeholder="Title, code, organiser or EVT-XXXXX">
+            </div>
+            <div class="field">
+              <label for="efVenue">Venue</label>
+              <select class="select" id="efVenue" name="venue"><option value="">All venues</option></select>
+            </div>
+            <div class="field">
+              <label for="efCategory">Category</label>
+              <select class="select" id="efCategory" name="category"><option value="">All categories</option></select>
+            </div>
+            <div class="field">
+              <label for="efStatus">Status</label>
+              <select class="select" id="efStatus" name="status"><option value="">All statuses</option></select>
+            </div>
+            <div class="field">
+              <label for="efFrom">From</label>
+              <input class="input" type="date" id="efFrom" name="from">
+            </div>
+            <div class="field">
+              <label for="efTo">To</label>
+              <input class="input" type="date" id="efTo" name="to">
+            </div>
+            <button class="btn btn--sm" type="reset">Clear</button>
+            <button class="btn btn--sm btn--black" type="button" data-new-event>+ New event</button>
+          </form>
+          <p class="result-count" id="evCount"></p>
+          <div class="table-wrap">
+            <table class="data responsive ev-table">
+              <thead>
+                <tr><th>Event</th><th>Venue</th><th>When</th><th>Capacity</th><th>Price</th><th>Status</th><th>Actions</th></tr>
+              </thead>
+              <tbody id="evBody"></tbody>
+            </table>
+          </div>
+
+          <div class="room-group" style="margin-top:28px">
+            <div class="room-group__head">
+              <h3>Venue schedule</h3>
+              <div class="row-actions">
+                <input class="input input--sm" type="date" id="vsStart" aria-label="Schedule start date">
+                <button class="btn btn--sm" type="button" data-vs-shift="-7">&larr; 7 days</button>
+                <button class="btn btn--sm" type="button" data-vs-shift="0">Today</button>
+                <button class="btn btn--sm" type="button" data-vs-shift="7">7 days &rarr;</button>
+              </div>
+            </div>
+            <div class="legend">
+              <span><i class="tl--pending"></i>Pending request</span>
+              <span><i class="tl--confirmed"></i>Scheduled</span>
+              <span><i class="tl--checked-in"></i>Ongoing</span>
+              <span><i class="tl--completed"></i>Completed</span>
+              <span class="muted">Cancelled events free the venue and are not shown. Click an event to open it.</span>
+            </div>
+            <div id="venueSchedule"></div>
+          </div>
+        </section>
+
+        <!-- Outbox -->
+        <section class="view" data-view="outbox" aria-label="Notifications" hidden>
+          <p class="lead" style="margin-top:0">Every confirmation, change and cancellation produces a simulated email. Nothing is actually sent.</p>
+          <div class="table-wrap">
+            <table class="data responsive">
+              <thead><tr><th>Sent</th><th>Reference</th><th>Recipient</th><th>Type</th><th>Message</th></tr></thead>
+              <tbody id="outboxBody"></tbody>
+            </table>
+          </div>
+        </section>
+    </main>
+  </div>
+
+  <!-- Create / edit reservation -->
+  <dialog class="modal" id="resDialog" aria-labelledby="resDialogTitle">
+    <form id="resForm" novalidate>
+      <div class="modal__head">
+        <h2 id="resDialogTitle">New reservation</h2>
+        <button class="modal__close" type="button" aria-label="Close" data-close>&times;</button>
+      </div>
+      <div class="modal__body">
+        <div data-alert-slot></div>
+        <fieldset class="plain form-section" id="guestSection">
+          <legend>Guest</legend>
+          <div class="radio-row" id="guestModeRow" style="margin-bottom:14px">
+            <label><input type="radio" name="guestMode" value="new" checked> New guest</label>
+            <label><input type="radio" name="guestMode" value="existing"> Existing guest</label>
+          </div>
+          <div class="form-grid" id="newGuestFields">
+            <div class="field"><label for="rFirst">First name <span class="req">*</span></label><input class="input" id="rFirst" name="firstName" maxlength="60" required></div>
+            <div class="field"><label for="rLast">Last name <span class="req">*</span></label><input class="input" id="rLast" name="lastName" maxlength="60" required></div>
+            <div class="field"><label for="rEmail">Email <span class="req">*</span></label><input class="input" type="email" id="rEmail" name="email" required></div>
+            <div class="field"><label for="rPhone">Phone <span class="req">*</span></label><input class="input" id="rPhone" name="phone" required></div>
+          </div>
+          <div class="field" id="existingGuestField" hidden>
+            <label for="rGuestId">Select guest <span class="req">*</span></label>
+            <select class="select" id="rGuestId" name="guestId"></select>
+          </div>
+          <div id="editGuestInfo" hidden></div>
+        </fieldset>
+
+        <fieldset class="plain form-section">
+          <legend>Stay</legend>
+          <div class="form-grid">
+            <div class="field"><label for="rCategory">Room category <span class="req">*</span></label><select class="select" id="rCategory" name="category" required></select></div>
+            <div class="field"><label for="rRoom">Room</label><select class="select" id="rRoom" name="roomNumber"></select></div>
+            <div class="field"><label for="rCheckIn">Check-in <span class="req">*</span></label><input class="input" type="date" id="rCheckIn" name="checkIn" required></div>
+            <div class="field"><label for="rCheckOut">Check-out <span class="req">*</span></label><input class="input" type="date" id="rCheckOut" name="checkOut" required></div>
+            <div class="field"><label for="rGuests">Guests <span class="req">*</span></label><select class="select" id="rGuests" name="guests" required></select></div>
+            <div class="field" id="statusField"><label for="rStatus">Initial status</label>
+              <select class="select" id="rStatus" name="status"><option>Confirmed</option><option>Pending</option></select></div>
+            <div class="field full"><label for="rRequests">Special requests / notes</label><textarea class="textarea" id="rRequests" name="specialRequests" maxlength="500"></textarea></div>
+            <div class="full"><div class="price-summary" id="rSummary"></div></div>
+          </div>
+        </fieldset>
+      </div>
+      <div class="modal__foot">
+        <button class="btn" type="button" data-close>Close</button>
+        <button class="btn btn--black" type="submit" id="resSubmit">Create reservation</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- View reservation -->
+  <dialog class="modal" id="viewDialog" aria-labelledby="viewDlgTitle">
+    <div class="modal__head">
+      <h2 id="viewDlgTitle">Reservation</h2>
+      <button class="modal__close" type="button" aria-label="Close" data-close>&times;</button>
+    </div>
+    <div class="modal__body" id="viewBody"></div>
+    <div class="modal__foot" id="viewFoot"></div>
+  </dialog>
+
+  <!-- Guest edit -->
+  <dialog class="modal" id="guestDialog" aria-labelledby="guestTitle">
+    <form id="guestForm" novalidate>
+      <div class="modal__head">
+        <h2 id="guestTitle">Guest profile</h2>
+        <button class="modal__close" type="button" aria-label="Close" data-close>&times;</button>
+      </div>
+      <div class="modal__body">
+        <div data-alert-slot></div>
+        <div class="form-grid">
+          <div class="field"><label for="gFirst">First name <span class="req">*</span></label><input class="input" id="gFirst" name="firstName" maxlength="60" required></div>
+          <div class="field"><label for="gLast">Last name <span class="req">*</span></label><input class="input" id="gLast" name="lastName" maxlength="60" required></div>
+          <div class="field"><label for="gEmail">Email <span class="req">*</span></label><input class="input" type="email" id="gEmail" name="email" required></div>
+          <div class="field"><label for="gPhone">Phone <span class="req">*</span></label><input class="input" id="gPhone" name="phone" required></div>
+        </div>
+        <h3 class="eyebrow" style="margin:26px 0 10px">Reservation history</h3>
+        <div id="guestHistory"></div>
+      </div>
+      <div class="modal__foot">
+        <button class="btn" type="button" data-close>Close</button>
+        <button class="btn btn--black" type="submit">Save guest</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Create / edit event -->
+  <dialog class="modal modal--wide" id="eventFormDialog" aria-labelledby="evFormTitle">
+    <form id="eventForm" novalidate>
+      <div class="modal__head">
+        <h2 id="evFormTitle">New event</h2>
+        <button class="modal__close" type="button" aria-label="Close" data-close>&times;</button>
+      </div>
+      <div class="modal__body">
+        <div data-alert-slot></div>
+        <fieldset class="plain form-section">
+          <legend>Event</legend>
+          <div class="form-grid">
+            <div class="field full"><label for="eTitle">Title <span class="req">*</span></label><input class="input" id="eTitle" name="title" maxlength="120" required></div>
+            <div class="field"><label for="eCategory">Category <span class="req">*</span></label><select class="select" id="eCategory" name="category" required></select></div>
+            <div class="field"><label for="ePoster">Card artwork</label>
+              <select class="select" id="ePoster" name="poster">
+                <option value="cake">Cake / baking</option><option value="jazz">Jazz</option><option value="music">Live music</option>
+                <option value="theater">Theater</option><option value="film">Film</option><option value="wedding">Wedding</option>
+                <option value="birthday">Birthday</option><option value="corporate">Corporate</option><option value="gala">Gala / banquet</option>
+                <option value="festive">Festive / Christmas</option>
+              </select></div>
+            <div class="field full"><label for="eDescription">Description</label><textarea class="textarea" id="eDescription" name="description" maxlength="4000" rows="4" placeholder="Separate paragraphs with a blank line."></textarea></div>
+            <div class="field"><label for="eIncludes">What's included (one per line)</label><textarea class="textarea" id="eIncludes" name="includes" rows="3"></textarea></div>
+            <div class="field"><label for="eSampleNote">Sample / disclaimer note</label><textarea class="textarea" id="eSampleNote" name="sampleNote" rows="3" maxlength="500" placeholder="e.g. Date and price to be confirmed."></textarea></div>
+          </div>
+        </fieldset>
+        <fieldset class="plain form-section">
+          <legend>Venue &amp; schedule</legend>
+          <div class="form-grid">
+            <div class="field"><label for="eVenue">Venue <span class="req">*</span></label><select class="select" id="eVenue" name="venue" required></select></div>
+            <div class="field" id="eSetupField"><label for="eSetup">Setup <span class="req">*</span></label><select class="select" id="eSetup" name="setup"></select></div>
+            <div class="field"><label for="eDate">Date <span class="req">*</span></label><input class="input" type="date" id="eDate" name="date" required></div>
+            <div class="field vr-times">
+              <div class="field"><label for="eStart">Start <span class="req">*</span></label><input class="input" type="time" id="eStart" name="startTime" required></div>
+              <div class="field"><label for="eEnd">End <span class="req">*</span></label><input class="input" type="time" id="eEnd" name="endTime" required></div>
+            </div>
+            <div class="full" id="eConflicts" aria-live="polite"></div>
+          </div>
+        </fieldset>
+        <fieldset class="plain form-section">
+          <legend>Capacity, price &amp; registration</legend>
+          <div class="form-grid">
+            <div class="field"><label for="eCapacity">Capacity <span class="req">*</span></label><input class="input" type="number" id="eCapacity" name="capacity" min="1" step="1" required><span class="hint" id="eCapHint"></span></div>
+            <div class="field"><label for="ePrice">Price per person (PHP, 0 = free)</label><input class="input" type="number" id="ePrice" name="price" min="0" step="1" value="0"></div>
+            <div class="field full"><label for="ePriceNote">Price note</label><input class="input" id="ePriceNote" name="priceNote" maxlength="200" placeholder="e.g. Includes one welcome drink"></div>
+            <div class="field"><label for="eRegistration">Registration</label>
+              <select class="select" id="eRegistration" name="registration">
+                <option value="open">Open online registration</option><option value="invite">Invitation only</option><option value="none">No registration (open entry)</option>
+              </select></div>
+            <div class="field"><label for="eVisibility">Visibility</label>
+              <select class="select" id="eVisibility" name="visibility">
+                <option value="public">Public (listed on Events page)</option><option value="private">Private (hidden from guests)</option>
+              </select></div>
+            <div class="field"><label for="eOrganizer">Organiser</label><input class="input" id="eOrganizer" name="organizer" maxlength="120"></div>
+            <div class="field"><label for="eContactEmail">Contact email</label><input class="input" type="email" id="eContactEmail" name="contactEmail"></div>
+            <div class="field"><label for="eContactPhone">Contact phone</label><input class="input" id="eContactPhone" name="contactPhone"></div>
+          </div>
+        </fieldset>
+      </div>
+      <div class="modal__foot">
+        <button class="btn" type="button" data-close>Close</button>
+        <button class="btn btn--black" type="submit" id="eventSubmit">Schedule event</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- View event -->
+  <dialog class="modal modal--wide" id="eventViewDialog" aria-labelledby="evViewTitle">
+    <div class="modal__head">
+      <h2 id="evViewTitle">Event</h2>
+      <button class="modal__close" type="button" aria-label="Close" data-close>&times;</button>
+    </div>
+    <div class="modal__body" id="evViewBody"></div>
+    <div class="modal__foot" id="evViewFoot"></div>
+  </dialog>
+
+  <script type="module" src="/js/staff.js"></script>
+</body>
+</html>

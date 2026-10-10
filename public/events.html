@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Events &amp; Celebrations - Haraya Bay By Zaldy Land (Simulation)</title>
+  <meta name="description" content="Workshops, performances, galas and festive celebrations at the fictional Haraya Bay By Zaldy Land. Browse the calendar, register for events or request a venue.">
+  <link rel="icon" href="/img/emblem.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/amenities.css">
+  <link rel="stylesheet" href="/css/events.css">
+  <link rel="stylesheet" href="/css/themes.css">
+  <script src="/js/theme.js"></script>
+  <script src="/js/site.js" defer></script>
+</head>
+<body class="events-page">
+  <a class="skip-link" href="#main">Skip to Content</a>
+  <div class="topbar">
+    <div class="container tb-in">
+      <span class="tb-item tb-hide"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10.4c0 6.1-8 11.6-8 11.6S4 16.5 4 10.4a8 8 0 0 1 16 0z"/><circle cx="12" cy="10.4" r="2.8"/></svg>88 Bayview Promenade, Pasay City, Metro Manila</span>
+      <span class="tb-item tb-hide"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7 12.8 12.8 0 0 0 .7 2.9 2 2 0 0 1-.4 2.1L8 10a16 16 0 0 0 6 6l1.3-1.4a2 2 0 0 1 2.1-.4c.9.3 1.9.5 2.9.7a2 2 0 0 1 1.7 2z"/></svg><a href="tel:+63280000000">+63 2 8000 0000</a></span>
+      <span class="tb-right"><a class="tb-link" href="/staff.html">Staff Console</a></span>
+    </div>
+  </div>
+
+  <header class="site-header" id="siteHeader">
+    <div class="container hd-in">
+      <a class="brand" href="/" aria-label="Haraya Bay By Zaldy Land home">
+        <svg class="mg-ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.1" aria-hidden="true"><rect x="11" y="11" width="26" height="26" transform="rotate(45 24 24)"/><text x="24" y="30.5" text-anchor="middle" font-size="19" font-family="Cormorant Garamond, Georgia, serif" font-weight="600" fill="currentColor" stroke="none">H</text></svg>
+        <span class="brand-text"><b>Haraya Bay</b><i>BY ZALDY LAND</i></span>
+      </a>
+      <nav class="main-nav" id="mainNav" aria-label="Main">
+        <a href="/#rooms">Rooms &amp; Suites</a>
+        <a href="/amenities.html">Amenities</a>
+        <a href="/events.html" aria-current="page">Events</a>
+        <a href="/map.html">Map</a>
+        <a href="/#manage">Manage Booking</a>
+        <a href="/#contact">Contact</a>
+      </nav>
+      <div class="hd-actions">
+        <div data-theme-slot></div>
+        <a class="btn btn--black btn--sm" href="/#rooms">Reserve</a>
+        <button class="nav-toggle" type="button" aria-label="Open menu" aria-controls="mainNav" aria-expanded="false" data-nav-toggle><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 6.5h17M3.5 12h17M3.5 17.5h17"/></svg></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="amen-intro container">
+      <div class="eyebrow">Events &amp; Celebrations</div>
+      <h1 class="section-title">Workshops, shows and celebrations by the bay</h1>
+      <p class="lead">From hands-on workshops in the Event Studio to concerts in the Haraya Theater and galas in the Grand Ballroom. Browse what's on, register for a place, or request a venue for your own celebration.</p>
+    </section>
+
+    <section class="container" aria-label="Featured event">
+      <div id="featured" class="featured" aria-live="polite"></div>
+    </section>
+
+    <section class="container ev-browse" aria-labelledby="eventsHeading">
+      <div class="amen-list__head">
+        <h2 class="section-title" id="eventsHeading">What's on</h2>
+        <div class="view-toggle" role="group" aria-label="View">
+          <button type="button" class="filter-chip" data-view="list" aria-pressed="true">List</button>
+          <button type="button" class="filter-chip" data-view="calendar" aria-pressed="false">Calendar</button>
+        </div>
+      </div>
+
+      <form class="ev-filters" id="filters" role="search" aria-label="Filter events">
+        <div class="field ev-filters__search">
+          <label for="fQ">Search</label>
+          <input class="input" type="search" id="fQ" name="q" placeholder="Event name, keyword or code">
+        </div>
+        <div class="field">
+          <label for="fCategory">Category</label>
+          <select class="select" id="fCategory" name="category"><option value="">All categories</option></select>
+        </div>
+        <div class="field">
+          <label for="fVenue">Venue</label>
+          <select class="select" id="fVenue" name="venue"><option value="">All venues</option></select>
+        </div>
+        <div class="field">
+          <label for="fFrom">From</label>
+          <input class="input" type="date" id="fFrom" name="from">
+        </div>
+        <div class="field">
+          <label for="fTo">To</label>
+          <input class="input" type="date" id="fTo" name="to">
+        </div>
+        <div class="field">
+          <label for="fPhase">Status</label>
+          <select class="select" id="fPhase" name="phase">
+            <option value="active">Upcoming &amp; ongoing</option>
+            <option value="Upcoming">Upcoming</option>
+            <option value="Ongoing">Ongoing</option>
+            <option value="Completed">Completed</option>
+            <option value="Cancelled">Cancelled</option>
+            <option value="">All</option>
+          </select>
+        </div>
+        <button type="reset" class="btn btn--sm ev-filters__reset">Clear filters</button>
+      </form>
+
+      <p class="ev-count" id="resultCount" aria-live="polite"></p>
+      <div id="eventsState"></div>
+      <div class="ev-grid" id="eventList"></div>
+      <div class="ev-cal" id="eventCalendar" hidden></div>
+    </section>
+
+    <section class="ev-venues" id="venues" aria-labelledby="venuesHeading">
+      <div class="container">
+        <div class="eyebrow">Host your event</div>
+        <h2 class="section-title" id="venuesHeading">Our event venues</h2>
+        <p class="lead">Weddings, debuts, birthdays, conferences and galas. Explore each venue in 3D, then send a booking request; our events team reviews it and the time slot is held meanwhile.</p>
+        <div class="ev-venue-grid" id="venueGrid"></div>
+      </div>
+    </section>
+
+    <section class="container ev-manage" aria-labelledby="manageHeading">
+      <div class="ev-manage__grid">
+        <div>
+          <h2 class="section-title" id="manageHeading">Cancel a registration</h2>
+          <p>Can't make it? Release your place so another guest can attend. You need the registration reference (REG-…) from your confirmation.</p>
+        </div>
+        <form class="lookup-form" id="cancelRegForm" novalidate>
+          <div data-alert-slot></div>
+          <div class="form-grid">
+            <div class="field">
+              <label for="crRef">Registration reference <span class="req">*</span></label>
+              <input class="input" id="crRef" name="reference" placeholder="e.g. REG-7K3X9Q" required autocomplete="off">
+            </div>
+            <div class="field">
+              <label for="crEmail">Email used to register <span class="req">*</span></label>
+              <input class="input" type="email" id="crEmail" name="email" placeholder="you@example.com" required>
+            </div>
+          </div>
+          <div class="card-actions"><button class="btn btn--black" type="submit">Cancel registration</button></div>
+        </form>
+      </div>
+      <div class="sample-note">
+        <strong>Sample information</strong>
+        Events, dates, prices and capacities are fictional examples for this academic project. Registrations and venue requests are simulated:
+        no payment is collected, no tickets are issued and no external booking services are used. Featured brand names are referenced only as
+        workshop themes and do not imply any partnership with or endorsement by those businesses.
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="ft-grid">
+        <div>
+          <div class="ft-brand">
+            <svg class="mg-ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.1" aria-hidden="true"><rect x="11" y="11" width="26" height="26" transform="rotate(45 24 24)"/><text x="24" y="30.5" text-anchor="middle" font-size="19" font-family="Cormorant Garamond, Georgia, serif" font-weight="600" fill="currentColor" stroke="none">H</text></svg>
+            <span><b>Haraya Bay</b><i>BY ZALDY LAND</i></span>
+          </div>
+          <p class="ft-blurb">A twenty-room bayfront address in Pasay City. This site is an academic simulation: no real bookings are taken and no payment is processed.</p>
+        </div>
+        <nav aria-labelledby="ftExplore">
+          <h2 id="ftExplore">Explore</h2>
+          <div class="ft-links">
+            <a href="/#rooms">Rooms &amp; Suites</a>
+            <a href="/room.html">Virtual Room Tour</a>
+            <a href="/amenities.html">Amenities</a>
+            <a href="/events.html">Events</a>
+            <a href="/map.html">Property Map</a>
+          </div>
+        </nav>
+        <nav aria-labelledby="ftHotel">
+          <h2 id="ftHotel">Hotel</h2>
+          <div class="ft-links">
+            <a href="/#manage">Manage Booking</a>
+            <a href="/#manage">Cancel a stay</a>
+            <a href="/#contact">Contact</a>
+            <a href="/staff.html">Staff Console</a>
+          </div>
+        </nav>
+      </div>
+      <div class="ft-bottom">
+        <span>&copy; <span id="year"></span> Haraya Bay By Zaldy Land, a fictional property built for an academic reservation-system simulation. Events, venues and prices are sample information.</span>
+        <a href="/staff.html">Staff Console</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Event details + registration -->
+  <dialog class="modal modal--wide" id="eventDialog" aria-labelledby="evTitle">
+    <div class="modal__head">
+      <h2 id="evTitle">Event details</h2>
+      <button class="modal__close" type="button" aria-label="Close" data-close>&times;</button>
+    </div>
+    <div id="evBody"></div>
+  </dialog>
+
+  <!-- Venue booking request -->
+  <dialog class="modal" id="venueDialog" aria-labelledby="vrTitle">
+    <form id="venueForm" novalidate>
+      <div class="modal__head">
+        <h2 id="vrTitle">Book this venue</h2>
+        <button class="modal__close" type="button" aria-label="Close" data-close>&times;</button>
+      </div>
+      <div class="modal__body" id="vrBody">
+        <div data-alert-slot></div>
+        <div class="form-grid">
+          <div class="field">
+            <label for="vrVenue">Venue <span class="req">*</span></label>
+            <select class="select" id="vrVenue" name="venue" required></select>
+          </div>
+          <div class="field" id="vrSetupField">
+            <label for="vrSetup">Setup <span class="req">*</span></label>
+            <select class="select" id="vrSetup" name="setup"></select>
+          </div>
+          <div class="field full">
+            <label for="vrTitleInput">Event name <span class="req">*</span></label>
+            <input class="input" id="vrTitleInput" name="title" maxlength="120" placeholder="e.g. Cruz Family Reunion" required>
+          </div>
+          <div class="field">
+            <label for="vrCategory">Occasion <span class="req">*</span></label>
+            <select class="select" id="vrCategory" name="category" required>
+              <option>Wedding</option><option>Birthday</option><option>Corporate</option><option>Gala</option><option>Banquet</option><option>Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="vrGuests">Expected guests <span class="req">*</span></label>
+            <input class="input" type="number" id="vrGuests" name="capacity" min="1" step="1" required>
+            <span class="hint" id="vrCapHint"></span>
+          </div>
+          <div class="field">
+            <label for="vrDate">Date <span class="req">*</span></label>
+            <input class="input" type="date" id="vrDate" name="date" required>
+          </div>
+          <div class="field vr-times">
+            <div class="field">
+              <label for="vrStart">Start <span class="req">*</span></label>
+              <input class="input" type="time" id="vrStart" name="startTime" value="18:00" required>
+            </div>
+            <div class="field">
+              <label for="vrEnd">End <span class="req">*</span></label>
+              <input class="input" type="time" id="vrEnd" name="endTime" value="22:00" required>
+            </div>
+          </div>
+          <div class="full availability" id="vrAvailability" aria-live="polite"></div>
+          <div class="field">
+            <label for="vrFirst">First name <span class="req">*</span></label>
+            <input class="input" id="vrFirst" name="firstName" autocomplete="given-name" maxlength="60" required>
+          </div>
+          <div class="field">
+            <label for="vrLast">Last name <span class="req">*</span></label>
+            <input class="input" id="vrLast" name="lastName" autocomplete="family-name" maxlength="60" required>
+          </div>
+          <div class="field">
+            <label for="vrEmail">Email <span class="req">*</span></label>
+            <input class="input" type="email" id="vrEmail" name="email" autocomplete="email" required>
+          </div>
+          <div class="field">
+            <label for="vrPhone">Phone <span class="req">*</span></label>
+            <input class="input" type="tel" id="vrPhone" name="phone" autocomplete="tel" placeholder="+63 9xx xxx xxxx" required>
+          </div>
+          <div class="field full">
+            <label for="vrNotes">Notes for the events team</label>
+            <textarea class="textarea" id="vrNotes" name="description" maxlength="1000" placeholder="Optional: theme, catering, AV needs…"></textarea>
+          </div>
+          <p class="hint full">Simulation only: this sends a request to the staff portal. No deposit or payment is taken.</p>
+        </div>
+      </div>
+      <div class="modal__foot" id="vrFoot">
+        <button class="btn" type="button" data-close>Cancel</button>
+        <button class="btn btn--black" type="submit">Send request</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script type="module" src="/js/events.js"></script>
+</body>
+</html>

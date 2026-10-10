@@ -1,0 +1,22 @@
+{
+  "name": "haraya-hotel-reservation-system",
+  "version": "1.0.0",
+  "description": "Simulated hotel room reservation system (academic demo) with a guest site and staff dashboard.",
+  "private": true,
+  "type": "module",
+  "main": "server.js",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning server.js",
+    "reset": "node --disable-warning=ExperimentalWarning server/reset.js",
+    "test": "node --disable-warning=ExperimentalWarning --test \"test/**/*.test.js\""
+  },
+  "dependencies": {
+    "@fontsource/cormorant-garamond": "^5.3.0",
+    "@fontsource/jost": "^5.3.0",
+    "express": "^4.22.3",
+    "three": "^0.186.1"
+  }
+}
